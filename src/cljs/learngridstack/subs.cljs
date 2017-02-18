@@ -1,6 +1,8 @@
 (ns learngridstack.subs
     (:require-macros [reagent.ratom :refer [reaction]])
-    (:require [re-frame.core :as re-frame]))
+    (:require [re-frame.core :as re-frame]
+              [learngridstack.db :as mydb]))
+
 
 (re-frame/reg-sub
  :name
@@ -11,3 +13,8 @@
   :gsoption
   (fn [db]
     (:gsoption db)))
+
+(re-frame/reg-sub
+  :tableconfig
+  (fn [db _]
+    (get-in db [:tableconfig] mydb/init-tableconfig)))
